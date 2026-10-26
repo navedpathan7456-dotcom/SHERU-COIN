@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sheru Blockchain Demo</title>
+<style>
+body{
+  margin:0;
+  padding:20px;
+  background:#030912;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+.box{
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+  background:#08182b;
+  border:1px solid #123b59;
+  border-radius:20px;
+}
+h1{color:#00e5ff}
+.card{
+  background:#102b45;
+  padding:15px;
+  border-radius:12px;
+  margin-top:15px;
+  overflow-wrap:anywhere;
+}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  box-sizing:border-box;
+}
+input{
+  background:#030912;
+  color:white;
+  border:1px solid #244660;
+}
+button{
+  background:#00bfe8;
+  border:0;
+  font-weight:bold;
+}
+.small{color:#9bb9d4}
+</style>
+</head>
+<body>
+<div class="box">
+
+<h1>🦁 SHERU BLOCKCHAIN</h1>
+<p class="small">LOCAL LEARNING DEMO</p>
+
+<div class="card">
+  <b>Network</b>
+  <p>Local Demo Network</p>
+  <b>Blocks</b>
+  <p id="count">1</p>
+</div>
+
+<div class="card">
+  <b>Create Demo Transaction</b>
+  <input id="sender" placeholder="Sender name">
+  <input id="receiver" placeholder="Receiver name">
+  <input id="amount" type="number" min="1" placeholder="Demo amount">
+  <button onclick="addBlock()">Create Block</button>
+</div>
+
+<h3>Blockchain</h3>
+<div id="chain"></div>
+
+<p class="small">
+This is a local educational simulation.
+It is not a real cryptocurrency network.
+</p>
+
+</div>
+
+<script>
+let blocks = [{
+  index:0,
+  sender:"Network",
+  receiver:"Sheru Demo",
+  amount:0,
+  previousHash:"0",
+  hash:"GENESIS"
+}];
+
+function render(){
+
+ document.getElementById("count").innerText=
+ blocks.length;
+
+ document.getElementById("chain").innerHTML=
+ blocks.map(block=>`
+ <div class="card">
+ <b>Block ${block.index}</b>
+ <p>Sender: ${block.sender}</p>
+ <p>Receiver: ${block.receiver}</p>
+ <p>Demo amount: ${block.amount} SHERU</p>
+ <p>Previous hash: ${block.previousHash}</p>
+ <p>Hash: ${block.hash}</p>
+ </div>
+ `).join("");
+
+}
+
+function addBlock(){
+
+ let sender=document.getElementById("sender").value.trim();
+ let receiver=document.getElementById("receiver").value.trim();
+ let amount=Number(document.getElementById("amount").value);
+
+ if(!sender || !receiver || !Number.isFinite(amount) || amount<=0){
+   alert("Enter sender, receiver and positive demo amount");
+   return;
+ }
+
+ let previous=blocks[blocks.length-1];
+
+ let block={
+   index:blocks.length,
+   sender:sender,
+   receiver:receiver,
+   amount:amount,
+   previousHash:previous.hash,
+   hash:"DEMO-"+Date.now()
+ };
+
+ blocks.push(block);
+
+ render();
+
+ document.getElementById("sender").value="";
+ document.getElementById("receiver").value="";
+ document.getElementById("amount").value="";
+
+}
+
+render();
+</script>
+</body>
+</html>
