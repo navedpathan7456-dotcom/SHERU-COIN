@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sheru Wallet</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#030912;
+ color:white;
+ font-family:Arial,sans-serif;
+ padding:20px;
+}
+.wallet{
+ max-width:420px;
+ margin:auto;
+ background:#08182b;
+ border:1px solid #123b59;
+ border-radius:24px;
+ padding:22px;
+}
+h1{color:#00e5ff}
+.small{color:#9bb9d4}
+.balance{
+ margin-top:25px;
+ padding:22px;
+ background:#102b45;
+ border-radius:18px;
+}
+.amount{font-size:32px;font-weight:bold}
+.buttons{
+ display:flex;
+ gap:12px;
+ margin-top:20px;
+}
+button{
+ flex:1;
+ padding:14px;
+ border:0;
+ border-radius:12px;
+ background:#00bfe8;
+ color:#00131c;
+ font-weight:bold;
+}
+input{
+ width:100%;
+ padding:12px;
+ margin-top:10px;
+ border-radius:10px;
+ border:1px solid #244660;
+ background:#06111f;
+ color:white;
+}
+</style>
+</head>
+<body>
+<div class="wallet">
+<h1>🦁 SHERU WALLET</h1>
+<p class="small">SHERU COIN • TEST DEMO</p>
+
+<div class="balance">
+<p class="small">Demo Balance</p>
+<div class="amount" id="balance">1000 SHR</div>
+</div>
+
+<div class="buttons">
+<button onclick="receive()">Receive</button>
+<button onclick="send()">Send</button>
+</div>
+
+<h3>Wallet Address</h3>
+<p class="small">Demo wallet only</p>
+
+<h3>Transaction History</h3>
+<div id="history">No transactions yet</div>
+</div>
+
+<script>
+let balance=1000;
+
+function receive(){
+ document.getElementById("history").innerText=
+ "Demo: Received 100 SHR";
+}
+
+function send(){
+ if(balance<10){
+ alert("Demo balance is low");
+ return;
+ }
+ balance-=10;
+ document.getElementById("balance").innerText=
+ balance+" SHR";
+ document.getElementById("history").innerText=
+ "Demo: Sent 10 SHR";
+}
+</script>
+</body>
+  </html>
+  
